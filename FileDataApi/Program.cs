@@ -1,4 +1,5 @@
 using FileDataApi.Services;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 var AllowSpecificOrigins = "AllowSpecificOrigins";
@@ -17,8 +18,15 @@ builder.Services.AddCors(options =>
                               policy.AllowAnyOrigin()
                                     .AllowAnyHeader()
                                     .AllowAnyMethod();
-                          });
+                          }
+    );
 });
+
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
 
 
 builder.Services.AddEndpointsApiExplorer();
