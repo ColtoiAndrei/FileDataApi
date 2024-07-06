@@ -1,12 +1,24 @@
 using FileDataApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+var AllowSpecificOrigins = "AllowSpecificOrigins";
 
 // Add services to the container.
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<ISortService, SortService>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(AllowSpecificOrigins,
+                          policy =>
+                          {
+                              policy.AllowAnyOrigin()
+                                    .AllowAnyHeader()
+                                    .AllowAnyMethod();
+                          });
+});
 
 
 builder.Services.AddEndpointsApiExplorer();
@@ -22,6 +34,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(AllowSpecificOrigins);
 
 app.UseAuthorization();
 
