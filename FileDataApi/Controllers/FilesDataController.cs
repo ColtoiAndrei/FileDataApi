@@ -44,12 +44,12 @@ namespace FileDataApi.Controllers
         {
             try
             {
-                if (sortOptions == null || companies == null || companies.Count == 0)
+                if (request.SortOptions == null || request.Companies == null || request.Companies.Count == 0)
                 {
                     return BadRequest("Invalid request: Missing companies list or sort options.");
                 }
 
-                List<Company> sortedCompanies = sortService.SortCompanies(companies, sortOptions);
+                List<Company> sortedCompanies = sortService.SortCompanies(request.Companies, request.SortOptions);
 
                 return Ok(sortedCompanies);
             }

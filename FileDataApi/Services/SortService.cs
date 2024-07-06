@@ -9,7 +9,7 @@ namespace FileDataApi.Services
         {
             switch (sortOptions.SortType)
             {
-                case SortType.Company:
+                case SortType.CompanyName:
                     if (sortOptions.SortOrder == SortOrder.Asc)
                     {
                         return companies.OrderBy(c => c.CompanyName).ToList();
@@ -19,7 +19,7 @@ namespace FileDataApi.Services
                         return companies.OrderByDescending(c => c.CompanyName).ToList();
                     }
 
-                case SortType.Contact:
+                case SortType.ContactName:
                     if (sortOptions.SortOrder == SortOrder.Asc)
                     {
                         return companies.OrderBy(c => c.ContactName).ToList();

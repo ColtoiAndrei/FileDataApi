@@ -2,7 +2,7 @@
 
 namespace FileDataApi.Enums
 {
-    public enum 
+    public enum SortOrder
     {
         Asc,
         Desc
